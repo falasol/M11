@@ -1,0 +1,262 @@
+---
+title: "Moderation and Mediation"
+subtitle: "A reference note on Baron and Kenny (1986)"
+author: "Frank Renn"
+date: 2026-11-11
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    embed-resources: true
+    theme: cosmo
+    html-math-method: mathml
+    code-copy: true
+    code-overflow: wrap
+---
+
+# Article Overview
+
+**Assigned reading:** Baron and Kenny (1986), *Journal of Personality and Social Psychology*, 51(6), 1173–1182. [DOI](https://doi.org/10.1037/0022-3514.51.6.1173) · [Full-text PDF][bk-pdf]
+
+This methodological article distinguishes variables that change relationships from variables that transmit them. Its contribution concerns theory, research design, and statistical analysis. The core distinctions below summarize the assigned paper. Subsequent equations and hypothetical examples form a reusable statistical reference; the later-method section identifies additional sources explicitly.
+
+## Important Facts from the Paper
+
+| Topic | Important fact | Printed pages |
+|:--|:--|:--|
+| Moderation | A moderator changes an association's magnitude or direction; interaction terms test this role. | 1174–1176 |
+| Variable types | Moderators can be categorical or continuous. The article covers all four combinations with categorical or continuous predictors. | 1174–1176 |
+| Mediation | A mediator represents an intervening process linking predictor and outcome. | 1176–1177 |
+| Original procedure | Estimate three regressions, assess the component relationships, and compare the predictor coefficient before and after adjustment for the mediator. | 1177 |
+| Measurement and direction | Mediator measurement error and outcome-to-mediator feedback threaten interpretation. | 1177 |
+| Combined explanations | Moderation and mediation can coexist within one model. | 1178–1179 |
+| Research strategy | Conditional relationships can suggest mechanisms; mechanisms can suggest interventions. | 1178–1181 |
+
+Page numbers refer to the journal pagination. PDF page 1 corresponds to printed page 1173.
+
+# Moderation: A Conditional Relationship
+
+## Model and Interpretation
+
+Let $X$ be a focal predictor, $W$ a moderator, and $Y$ an outcome. A linear interaction model is
+
+$$
+E(Y\mid X,W)=\beta_0+\beta_1X+\beta_2W+\beta_3XW.
+$$
+
+The relationship between $X$ and the expected outcome depends on $W$:
+
+$$
+\text{Slope of }X\text{ at }W=w=\beta_1+\beta_3w.
+$$
+
+For a binary $X$, this expression is the predicted difference between $X=1$ and $X=0$ at the stated $w$.
+
+| Coefficient | Interpretation |
+|:--|:--|
+| $\beta_1$ | Relationship between $X$ and $Y$ at $W=0$ |
+| $\beta_2$ | Relationship between $W$ and $Y$ at $X=0$ |
+| $\beta_3$ | Change in the $X$ slope for a one-unit increase in $W$ |
+
+Testing $\beta_3=0$ directly addresses the linear interaction hypothesis. Retain the constituent $X$ and $W$ terms in this model. A moderator need not have a statistically significant main effect for the interaction to be meaningful. The values coded as zero determine the interpretation of the lower-order coefficients.
+
+## Choosing an Analysis
+
+The four measurement combinations translate into the following model choices. This table is a practical restatement using the notation in this note.
+
+| Predictor $X$ | Moderator $W$ | Model for a continuous outcome |
+|:--|:--|:--|
+| Binary | Binary | Factorial ANOVA or equivalent regression with $XW$ |
+| Continuous | Binary | Regression testing the difference between group slopes |
+| Binary | Continuous | Interaction regression with a specified functional form |
+| Continuous | Continuous | Product-term regression, followed by conditional-slope interpretation |
+
+A single product term describes a linear change in the slope. A theory predicting curvature requires a corresponding model. For example, quadratic moderation can include $W^2$ and $XW^2$, together with the relevant lower-order terms. An arbitrary split of a continuous moderator discards information and changes the question being tested.
+
+## Hypothetical Loyalty-Offer Example
+
+Suppose $X=1$ means a customer receives an offer, $W=1$ identifies a returning customer, and $Y$ is a revisit-intention score. Consider this illustrative prediction equation:
+
+$$
+\widehat Y=2+0.8X+0.4W+1.2XW.
+$$
+
+| Customer status | No offer: $X=0$ | Offer: $X=1$ | Predicted offer difference |
+|:--|--:|--:|--:|
+| New: $W=0$ | 2.0 | 2.8 | 0.8 |
+| Returning: $W=1$ | 2.4 | 4.4 | 2.0 |
+
+The difference between the two offer effects is $2.0-0.8=1.2$, exactly the interaction coefficient. The claim concerns how the offer relationship varies by status. A separate claim that status itself changes intentions would concern another coefficient and would need its own design justification.
+
+These coefficients are hypothetical. They are not findings from the assigned article or estimates from customer data. Without observations and uncertainty estimates, the arithmetic cannot establish statistical significance.
+
+## Two Interpretation Checks
+
+**Compare slopes directly.** A significant slope in one group and a nonsignificant slope in another do not establish that the slopes differ. Test the interaction or the corresponding slope contrast.
+
+**Keep correlation and slope distinct.** For a simple regression within a group,
+
+$$
+r_{XY}=b\frac{s_X}{s_Y}.
+$$
+
+Thus, equal unstandardized slopes can coexist with different correlations if the groups' variances differ. Comparisons of correlations do not automatically answer a slope-moderation question. A model also needs to account appropriately for differences in residual variation when estimating uncertainty.
+
+# Mediation: An Indirect Pathway
+
+## Notation and Regression Equations
+
+Let $M$ be a proposed mediator. This note uses $c$ for the total coefficient and $c'$ for the direct coefficient. In the original paper's Figure 3, the direct path is labeled $c$; the prime notation here avoids ambiguity.
+
+| Regression | Equation | Coefficient to interpret |
+|:--|:--|:--|
+| Mediator model | $M=\alpha_0+aX+e_M$ | $a$: relationship of $X$ with $M$ |
+| Total-outcome model | $Y=\gamma_0+cX+e_T$ | $c$: total relationship of $X$ with $Y$ |
+| Adjusted-outcome model | $Y=\delta_0+c'X+bM+e_Y$ | $b$: relationship of $M$ with $Y$ conditional on $X$; $c'$: direct coefficient |
+
+```{=html}
+<figure class="model-diagram">
+<svg viewBox="0 0 600 240" role="img" aria-labelledby="mediation-title mediation-description">
+  <title id="mediation-title">Direct and indirect paths in a simple mediation model</title>
+  <desc id="mediation-description">X connects to M through path a. M connects to Y through path b. X also connects directly to Y through path c prime.</desc>
+  <defs>
+    <marker id="path-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#466a7d"/>
+    </marker>
+  </defs>
+  <path d="M130,150 L255,77" fill="none" stroke="#466a7d" stroke-width="2.2" marker-end="url(#path-arrow)"/>
+  <path d="M345,77 L470,150" fill="none" stroke="#466a7d" stroke-width="2.2" marker-end="url(#path-arrow)"/>
+  <path d="M145,178 L451,178" fill="none" stroke="#117c7c" stroke-width="2.2" marker-end="url(#path-arrow)"/>
+  <rect x="35" y="148" width="110" height="60" rx="7" fill="#edf4f7" stroke="#466a7d" stroke-width="1.5"/>
+  <rect x="245" y="22" width="110" height="60" rx="7" fill="#173f53" stroke="#173f53" stroke-width="1.5"/>
+  <rect x="455" y="148" width="110" height="60" rx="7" fill="#edf4f7" stroke="#466a7d" stroke-width="1.5"/>
+  <g font-family="sans-serif" font-size="28" text-anchor="middle">
+    <text x="90" y="188" fill="#173f53">X</text>
+    <text x="300" y="62" fill="white">M</text>
+    <text x="510" y="188" fill="#173f53">Y</text>
+  </g>
+  <g font-family="sans-serif" font-size="23" text-anchor="middle">
+    <text x="190" y="100" fill="#466a7d">a</text>
+    <text x="410" y="100" fill="#466a7d">b</text>
+    <text x="300" y="207" fill="#117c7c">c′</text>
+  </g>
+</svg>
+<figcaption>Original schematic using this note's notation. The indirect route is a × b. Arrows describe the proposed model; they do not establish causal direction from observed associations alone.</figcaption>
+</figure>
+```
+
+For compatible unstandardized linear regressions fitted to the same observations and covariates, without an $X\times M$ interaction,
+
+$$
+\underbrace{c}_{\text{total}}=
+\underbrace{c'}_{\text{direct}}+
+\underbrace{ab}_{\text{indirect}}.
+$$
+
+The indirect coefficient is a **product of two paths**, while the moderation coefficient multiplies two predictors inside one outcome equation. These are different statistical objects.
+
+The decomposition is an algebraic result for the stated linear setup. Calling its components causal effects requires additional assumptions. It should not be transferred automatically to logistic models, different analysis samples, or models containing exposure–mediator interactions.
+
+## The Original Causal-Steps Procedure
+
+The historical procedure checks the $X$–$M$, total $X$–$Y$, and adjusted $M$–$Y$ relationships, then looks for a reduced direct coefficient. A zero remaining direct path represents the paper's strongest single-mediator explanation; a reduced nonzero path allows other pathways. This is the original framework, rather than a requirement to stop analysis whenever the total-effect test is nonsignificant.
+
+Specifically, the original significance criteria concern $a$, $c$, and the adjusted $b$, in the predicted directions. The comparison of $c'$ with $c$ adds a further condition, rather than a fourth regression. These historical screening criteria are distinct from a direct test of $ab$.
+
+## Hypothetical Perceived-Value Example
+
+Let $X$ represent receipt of an offer, $M$ perceived value, and $Y$ revisit intention. Suppose the fitted coefficients were
+
+$$
+a=0.60,\qquad b=0.50,\qquad c'=0.10.
+$$
+
+Then
+
+$$
+ab=0.60(0.50)=0.30,\qquad c=0.10+0.30=0.40.
+$$
+
+The indirect route corresponds to 0.30 intention-score units per unit of $X$ in this hypothetical linear model. The direct coefficient is 0.10, and the total is 0.40. These are coefficient calculations, not evidence that perceived value has been established as a causal mechanism.
+
+Now change only $c'$ to $-0.30$. The indirect coefficient remains $0.30$, but the total becomes zero. Opposing pathways can therefore cancel. This numerical example shows why a near-zero total coefficient does not imply a zero indirect coefficient.
+
+## Indirect-Effect Inference
+
+A familiar normal-approximation calculation is
+
+$$
+SE_{ab}\approx\sqrt{b^2s_a^2+a^2s_b^2},
+\qquad z\approx\frac{ab}{SE_{ab}}.
+$$
+
+Here $s_a$ and $s_b$ are standard errors. This approximation omits covariance between the two coefficient estimators. Page 1177 also prints a version with an additional $s_a^2s_b^2$ term and explains that Sobel's approximation drops that term.
+
+The product's sampling distribution can be asymmetric. A confidence interval constructed for the indirect coefficient is more informative than looking only for a change in the direct coefficient's significance status. The later-method notes below explain the bootstrap alternative.
+
+# Combining Moderation and Mediation
+
+The two questions can be asked together. **Moderated mediation** concerns an indirect relationship that varies with a moderator. **Mediated moderation** concerns an intervening route that helps account for an interaction. These labels describe hypotheses that need explicit equations and design arguments.
+
+In the article's control–stress illustration, manipulated control and perceived control have different roles. A control-by-stress interaction addresses moderation; a measured perceived-control pathway addresses mediation (pp. 1178–1180). A manipulation check alone does not establish the proposed mechanism.
+
+For an illustrative first-stage interaction model,
+
+$$
+M=\alpha_0+a_1X+a_2W+a_3XW+e_M,
+$$
+
+$$
+Y=\delta_0+c'X+bM+dW+e_Y.
+$$
+
+Holding $W=w$, the indirect coefficient is
+
+$$
+IE(w)=(a_1+a_3w)b.
+$$
+
+If $a_1=.40$, $a_3=.20$, and $b=.50$, then $IE(0)=.20$ and $IE(1)=.30$. The indirect route differs by .10 between those moderator values. These equations are a teaching example, not a reproduction of every path in the article's combined control–stress model. A defensible analysis would quantify uncertainty in the conditional indirect coefficients and their difference.
+
+# Later Methodological Guidance
+
+This section supplements the assigned reading. It should not be attributed to the 1986 article.
+
+## Estimate the Indirect Coefficient Directly
+
+MacKinnon et al. (2002) found low statistical power for the commonly used Baron–Kenny procedure in their simulation comparison. A nonsignificant total coefficient should not serve as an automatic gate against investigating a theoretically justified indirect pathway. The cancellation example above gives the algebraic reason.
+
+Preacher and Hayes (2004) emphasize inference about the indirect coefficient itself and describe bootstrap confidence intervals. In an appropriate independent-observation setting, resample observations, refit both regressions, calculate $ab$ for each sample, and use the resulting distribution to construct an interval. Report the interval method and resampling count. A 95% interval excluding zero supports a nonzero indirect coefficient under the analysis assumptions; it does not prove the proposed mechanism. Clustered or otherwise dependent observations need a resampling strategy that respects that dependence.
+
+## Significance Status Does Not Establish Complete Mediation
+
+Nonsignificance of $c'$ is not proof that the population direct coefficient is exactly zero. A coefficient can change significance because its standard error changes, even with little change in its magnitude. Preacher and Hayes (2004) discuss this problem. Report estimates and uncertainty for the direct and indirect components rather than making the conclusion depend entirely on the labels “full” and “partial.”
+
+## Causal Interpretation Requires Design Assumptions
+
+Imai, Keele, and Tingley (2010) distinguish estimation from causal identification. Randomizing $X$ alone does not randomize $M$ or remove mediator–outcome confounding. Their framework requires additional assumptions and provides sensitivity analysis for violations.
+
+For future research, justify the temporal ordering, identify plausible confounders, assess measurement quality, and state the assumptions supporting causal language. Repeated measurement can help establish timing, but does not by itself remove confounding. Bootstrap intervals address sampling uncertainty; they do not repair reverse causation, poor measurement, or an inappropriate identification strategy.
+
+The assigned paper also warns that mediator measurement error can underestimate its contribution and inflate the remaining predictor coefficient in the positive-path setting discussed on p. 1177. A weak estimated mediator path may therefore reflect measurement limitations as well as theory.
+
+# Reference Checklist
+
+Before interpreting a third variable, record:
+
+1. **The question:** Is the aim to identify a changing relationship, an intervening pathway, or both?
+2. **The roles:** Define $X$, $Y$, $W$, and/or $M$ before choosing software.
+3. **The model:** Write the equations, coding rules, covariates, and proposed temporal order.
+4. **The estimate:** Use an interaction coefficient for linear moderation and a path product for simple linear mediation.
+5. **The uncertainty:** Report confidence intervals and the method used to obtain them.
+6. **The design limits:** Separate statistical associations from causal conclusions.
+7. **The reporting:** Give effect sizes, variable units, sample size, missing-data handling, and relevant model diagnostics.
+
+The enduring use of the distinction is to align the research question, model, and interpretation. A third variable's name or position in a dataset cannot determine its scientific role.
+
+# Appendix
+
+## Project Links
+- [GitHub Repository](https://github.com/falasol/M11)
+- [GitHub Pages Website](https://falasol.github.io/M11/M11-Note-taking-mediator-moderator.html)
